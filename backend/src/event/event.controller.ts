@@ -11,6 +11,7 @@ import {
   UploadedFile,
   Req,
   BadRequestException,
+  Query,
 } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -31,16 +32,6 @@ export class EventController {
   @Post()
   create(@Body() createEventDto: CreateEventDto) {
     return this.eventService.create(createEventDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.eventService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.eventService.findOne(id);
   }
 
   @UseGuards(AuthGuard, RolesGuard)
@@ -76,6 +67,16 @@ export class EventController {
 
       return await this.eventService.update(id, response);
     }
+  }
+
+  @Get()
+  findAll(@Query('search') search: string) {
+    return this.eventService.findAll(search);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.eventService.findOne(id);
   }
 
   @Roles(Role.Admin)

@@ -15,7 +15,12 @@ export class EventService {
     return await this.eventModel.create(createEventDto);
   }
 
-  async findAll() {
+  async findAll(search: string) {
+    if (search) {
+      return await this.eventModel.find({
+        title: { $regex: search, $options: 'i' },
+      });
+    }
     return await this.eventModel.find();
   }
 

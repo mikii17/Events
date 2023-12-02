@@ -6,9 +6,8 @@ import { AdminModule } from './admin/admin.module';
 import { RegisteredUsersModule } from './registered_users/registered_users.module';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { jwtConstants } from './auth/const/auth.const';
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EmailModule } from './email/email.module';
 import * as express from 'express';
 import { join } from 'path';
@@ -20,14 +19,15 @@ import { join } from 'path';
     RegisteredUsersModule,
     AuthModule,
     EmailModule,
-    MongooseModule.forRoot('mongodb://localhost/test_project'),
-    JwtModule.register({
-      global: true,
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '1d' },
-    }),
     ConfigModule.forRoot({
       isGlobal: true, // no need to import into other modules
+    }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('DB_CONNECTION'),
+      }),
+      inject: [ConfigService],
     }),
   ],
   controllers: [AppController],

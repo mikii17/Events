@@ -31,12 +31,7 @@ export class AuthService {
     return await this.signJWT(loginAuthDto);
   }
 
-  // logout(createAuthDto: CreateAuthDto) {
-  //   return 'This action adds a new auth';
-  // }
-
   async signJWT(loginAuthDto: LoginAuthDto) {
-    console.log(loginAuthDto);
     const email = loginAuthDto.email;
     const password = loginAuthDto.password;
     const user = await this.adminService.findOneByEmail(email);
@@ -51,20 +46,4 @@ export class AuthService {
       access_token: await this.jwtService.signAsync(payload),
     };
   }
-
-  // findAll() {
-  //   return `This action returns all auth`;
-  // }
-
-  // findOne(id: number) {
-  //   return `This action returns a #${id} auth`;
-  // }
-
-  // // update(id: number, updateAuthDto: UpdateAuthDto) {
-  // //   return `This action updates a #${id} auth`;
-  // // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} auth`;
-  // }
 }

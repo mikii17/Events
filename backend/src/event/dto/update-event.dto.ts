@@ -1,13 +1,13 @@
 import { CreateEventDto } from './create-event.dto';
 
 export class UpdateEventDto {
-  title: string;
+  title?: string;
 
-  description: string;
+  description?: string;
 
-  when: Date;
+  when?: string;
 
-  address: string;
+  address?: string;
 
-  image: string;
+  image?: string;
 }

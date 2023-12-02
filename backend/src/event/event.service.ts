@@ -7,8 +7,10 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class EventService {
-  constructor(@InjectModel(Event.name) private readonly eventModel: Model<Event>) {}
-  
+  constructor(
+    @InjectModel(Event.name) private readonly eventModel: Model<Event>,
+  ) {}
+
   async create(createEventDto: CreateEventDto) {
     return await this.eventModel.create(createEventDto);
   }
@@ -22,7 +24,9 @@ export class EventService {
   }
 
   async update(id: string, updateEventDto: UpdateEventDto) {
-    return await this.eventModel.findByIdAndUpdate(id, updateEventDto, {returnOriginal: false});
+    return await this.eventModel.findByIdAndUpdate(id, updateEventDto, {
+      returnOriginal: false,
+    });
   }
 
   async remove(id: string) {

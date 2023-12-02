@@ -1,10 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RegisteredUsersService } from './registered_users.service';
 import { CreateRegisteredUserDto } from './dto/create-registered_user.dto';
 
 @Controller('registered-users')
 export class RegisteredUsersController {
-  constructor(private readonly registeredUsersService: RegisteredUsersService) {}
+  constructor(
+    private readonly registeredUsersService: RegisteredUsersService,
+  ) {}
 
   @Post()
   create(@Body() createRegisteredUserDto: CreateRegisteredUserDto) {

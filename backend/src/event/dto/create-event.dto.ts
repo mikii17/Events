@@ -1,18 +1,17 @@
 import { IsString, IsDate, IsNotEmpty } from 'class-validator';
 
 export class CreateEventDto {
-    @IsNotEmpty()
-    title: string;
+  @IsNotEmpty()
+  title: string;
 
-    @IsNotEmpty()
-    description: string;
+  @IsNotEmpty()
+  description: string;
 
-    @IsDate()
-    @IsNotEmpty()
-    when: Date;
+  @IsNotEmpty()
+  when: string;
 
-    @IsNotEmpty()
-    address: string;
+  @IsNotEmpty()
+  address: string;
 
-    image: string;
+  image: string;
 }

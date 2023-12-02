@@ -4,13 +4,15 @@ import { UpdateAdminDto } from './dto/update-admin.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Admin } from './schema/admin.schema';
 import { Model } from 'mongoose';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AdminService {
-  constructor(@InjectModel(Admin.name) private readonly adminModel: Model<Admin>) {}
+  constructor(
+    @InjectModel(Admin.name) private readonly adminModel: Model<Admin>,
+  ) {}
 
   async create(createAdminDto: CreateAdminDto) {
-
     return await this.adminModel.create(createAdminDto);
   }
 
@@ -23,11 +25,25 @@ export class AdminService {
   }
 
   async findOneByEmail(email: string) {
-    return await this.adminModel.findOne({email: email});
+    return await this.adminModel.findOne({ email: email });
   }
 
   async update(id: string, updateAdminDto: UpdateAdminDto) {
-    return await this.adminModel.findByIdAndUpdate(id, updateAdminDto), {returnOriginal: false}; 
+    console.log(id, updateAdminDto.password);
+    const salt = (await bcrypt.genSalt()) as string;
+    const hashPassword = (await bcrypt.hash(
+      updateAdminDto.password,
+      salt,
+    )) as string;
+    return await this.adminModel.findByIdAndUpdate(
+      id,
+      {
+        ...updateAdminDto,
+        password: hashPassword,
+        salt: salt,
+      },
+      { returnOriginal: false },
+    );
   }
 
   async remove(id: string) {

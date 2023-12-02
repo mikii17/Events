@@ -1,5 +1,6 @@
+import { IsStrongPassword } from 'class-validator';
+
 export class UpdateAdminDto {
-    email: string;
-    password: string;
-    role: string[];
+  @IsStrongPassword()
+  password: string;
 }

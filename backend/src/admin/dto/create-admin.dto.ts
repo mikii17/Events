@@ -10,5 +10,8 @@ export class CreateAdminDto {
     password: string;
 
     @IsNotEmpty()
+    salt: string;
+
+    @IsNotEmpty()
     roles: string[];
 }

@@ -11,6 +11,9 @@ export class CreateEventDto {
   when: string;
 
   @IsNotEmpty()
+  link: string;
+
+  @IsNotEmpty()
   address: string;
 
   image: string;

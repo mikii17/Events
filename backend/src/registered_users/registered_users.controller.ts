@@ -21,6 +21,11 @@ export class RegisteredUsersController {
     return this.registeredUsersService.create(createRegisteredUserDto);
   }
 
+  @Get('events/:eventId')
+  findAllByEventId(@Param('eventId') eventId: string) {
+    return this.registeredUsersService.findAllByEventId(eventId);
+  }
+
   @Get()
   findAll() {
     return this.registeredUsersService.findAll();

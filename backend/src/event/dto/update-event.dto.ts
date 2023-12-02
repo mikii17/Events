@@ -7,6 +7,8 @@ export class UpdateEventDto {
 
   when?: string;
 
+  link?: string;
+
   address?: string;
 
   image?: string;

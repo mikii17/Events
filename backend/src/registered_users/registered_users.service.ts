@@ -29,6 +29,10 @@ export class RegisteredUsersService {
     return await this.registerUserModel.find();
   }
 
+  async findAllByEventId(eventId: string) {
+    return await this.registerUserModel.find({ eventId: eventId });
+  }
+
   async findOne(id: string) {
     return await this.registerUserModel.findById(id);
   }

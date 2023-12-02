@@ -27,7 +27,7 @@ export class AdminService {
   }
 
   async update(id: string, updateAdminDto: UpdateAdminDto) {
-    return await this.adminModel.findByIdAndUpdate(id, updateAdminDto); 
+    return await this.adminModel.findByIdAndUpdate(id, updateAdminDto), {returnOriginal: false}; 
   }
 
   async remove(id: string) {

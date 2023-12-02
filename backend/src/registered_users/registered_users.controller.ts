@@ -18,7 +18,7 @@ export class RegisteredUsersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.registeredUsersService.findOne(+id);
+    return this.registeredUsersService.findOne(id);
   }
 
   // @Patch(':id')
@@ -28,6 +28,6 @@ export class RegisteredUsersController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.registeredUsersService.remove(+id);
+    return this.registeredUsersService.remove(id);
   }
 }

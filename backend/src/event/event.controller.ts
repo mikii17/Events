@@ -19,16 +19,22 @@ export class EventController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.eventService.findOne(+id);
+    return this.eventService.findOne(id);
+  }
+
+  // TODO: Add image upload
+  @Patch('image/:id')
+  updateImage(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
+    return this.eventService.update(id, updateEventDto);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
-    return this.eventService.update(+id, updateEventDto);
+    return this.eventService.update(id, updateEventDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.eventService.remove(+id);
+    return this.eventService.remove(id);
   }
 }

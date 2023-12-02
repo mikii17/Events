@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Admin } from './schema/admin.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AdminService {
-  create(createAdminDto: CreateAdminDto) {
-    return 'This action adds a new admin';
+  constructor(@InjectModel(Admin.name) private readonly adminModel: Model<Admin>) {}
+
+  async create(createAdminDto: CreateAdminDto) {
+
+    return await this.adminModel.create(createAdminDto);
   }
 
-  findAll() {
-    return `This action returns all admin`;
+  async findAll() {
+    return await this.adminModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} admin`;
+  async findOneById(id: string) {
+    return this.adminModel.findById(id);
   }
 
-  update(id: number, updateAdminDto: UpdateAdminDto) {
-    return `This action updates a #${id} admin`;
+  async findOneByEmail(email: string) {
+    return await this.adminModel.findOne({email: email});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} admin`;
+  async update(id: string, updateAdminDto: UpdateAdminDto) {
+    return await this.adminModel.findByIdAndUpdate(id, updateAdminDto); 
+  }
+
+  async remove(id: string) {
+    return await this.adminModel.findByIdAndDelete(id);
   }
 }

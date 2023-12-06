@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 
 const Event = () => {
   return (
-    <div className='min-h-screen bg-primary flex items-center justify-center  px-5 py-10'>
+    <main className='min-h-screen bg-primary flex items-center justify-center  px-5 py-10'>
       <div className='max-w-[1024px] mx-auto flex flex-col md:flex-row items-center gap-10'>
-        <div className='flex-[1]'>
+        <section className='flex-[1]'>
           <div className=' bg-lightGreen flex justify-center items-center p-16 rounded-lg'>
             <img
               src='/event.svg'
@@ -13,9 +13,9 @@ const Event = () => {
               height={'170px'}
             />
           </div>
-        </div>
+        </section>
 
-        <div className='flex-[3] flex flex-col gap-16'>
+        <section className='flex-[3] flex flex-col gap-16'>
           <div className='flex items-center justify-between'>
             <h1 className='text-primary text-xl'>Title Title</h1>
             <div className='flex gap-3'>
@@ -46,9 +46,9 @@ const Event = () => {
             <button className='bg-accent p-2 rounded-lg'>RSVP</button>
             <Link to={''}>Check out the link</Link>
           </div>
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 

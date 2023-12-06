@@ -16,6 +16,16 @@ export class AdminService {
     return await this.adminModel.create(createAdminDto);
   }
 
+  async updateRefreshToken(id: string, refreshToken: string) {
+    return await this.adminModel.findByIdAndUpdate(
+      id,
+      {
+        refreshToken: refreshToken,
+      },
+      { returnOriginal: false },
+    );
+  }
+
   async findAll() {
     return await this.adminModel.find();
   }
@@ -29,7 +39,6 @@ export class AdminService {
   }
 
   async update(id: string, updateAdminDto: UpdateAdminDto) {
-    console.log(id, updateAdminDto.password);
     const salt = (await bcrypt.genSalt()) as string;
     const hashPassword = (await bcrypt.hash(
       updateAdminDto.password,

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Res, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginAuthDto } from './dto/login-auth.dto';
@@ -6,6 +6,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { RolesGuard } from './guard/role.guard';
 import { Roles } from './decorator/role.decorator';
 import { Role } from './enums/role.enum';
+import { RefreshAuthGuard } from './guard/refresh.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -19,27 +20,37 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(@Body() loginAuthDto: LoginAuthDto) {
-    return this.authService.login(loginAuthDto);
+  async login(
+    @Body() loginAuthDto: LoginAuthDto,
+    @Res({ passthrough: true }) res: any,
+  ) {
+    const tokens = await this.authService.login(loginAuthDto);
+    res.setHeader(
+      'Set-Cookie',
+      `refreshToken=${tokens.refreshToken}; HttpOnly; secure; Max-Age=${
+        60 * 60 * 24 * 7
+      };`,
+    );
+    return { access_token: tokens.access_token, roles: tokens.roles };
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.authService.findAll();
-  // }
+  @UseGuards(RefreshAuthGuard)
+  @Post('refresh')
+  async refresh(@Req() req: Request) {
+    const userId = req['user'].sub;
+    const refreshToken = req['cookies'].refreshToken;
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.authService.findOne(+id);
-  // }
+    return await this.authService.refresh(userId, refreshToken);
+  }
 
-  // // @Patch(':id')
-  // // update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-  // //   return this.authService.update(+id, updateAuthDto);
-  // // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.authService.remove(+id);
-  // }
+  @UseGuards(AuthGuard)
+  @Post('logout')
+  async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    const userId = req['user'].sub;
+    res.headers.set(
+      'Set-Cookie',
+      `refreshToken=; HttpOnly; secure; Max-Age=0;`,
+    );
+    await this.authService.logout(userId);
+  }
 }

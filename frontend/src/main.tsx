@@ -16,28 +16,29 @@ import App from "./App.tsx";
 import Signup from "./pages/auth/Signup.tsx";
 import ChangePassword from "./pages/auth/ChangePassword.tsx";
 import Login from "./pages/auth/Login.tsx";
+import AuthProvider from "./context/AuthContext.tsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <Error />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/event/:id",
-        element: <Event />,
-      },
-      {
-        path: "/signup",
-        element: <Register />,
-      },
-    ],
-  },
-]);
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App />,
+//     errorElement: <Error />,
+//     children: [
+//       {
+//         path: "/",
+//         element: <Home />,
+//       },
+//       {
+//         path: "/event/:id",
+//         element: <Event />,
+//       },
+//       {
+//         path: "/signup",
+//         element: <Register />,
+//       },
+//     ],
+//   },
+// ]);
 
 const router1 = createBrowserRouter(
   createRoutesFromElements(
@@ -48,7 +49,7 @@ const router1 = createBrowserRouter(
       <Route path="/register/:id" element={<Register />} />
       <Route>
         <Route path="/signup" element={<Signup />} />
-      <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/change-password" element={<ChangePassword />} />
       </Route>
       <Route path="*" element={<Error />} /> // TODO: 404 page
     </Route>
@@ -56,6 +57,8 @@ const router1 = createBrowserRouter(
 );
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router1} />
+    <AuthProvider>
+      <RouterProvider router={router1} />
+    </AuthProvider>
   </React.StrictMode>
 );

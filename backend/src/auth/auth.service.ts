@@ -41,7 +41,6 @@ export class AuthService {
 
   async refresh(userId: string, refreshToken: string) {
     const user = await this.adminService.findOneById(userId);
-    console.log(user.refreshToken);
     if (!user || !user.refreshToken) {
       throw new UnauthorizedException();
     }

@@ -18,6 +18,7 @@ import ChangePassword from "./pages/auth/ChangePassword.tsx";
 import Login from "./pages/auth/Login.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
 import ProtectionLayout from "./components/ProtectionLayout.tsx";
+import CreateEvent from "./pages/CreateEvent.tsx";
 
 // const router = createBrowserRouter([
 //   {
@@ -50,6 +51,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/events/:id" element={<Event />} />
       <Route path="/register/:id" element={<Register />} />
+        <Route path="/create-event" element={<CreateEvent />} />
       <Route element={<ProtectionLayout />}>
         <Route path="/signup" element={<Signup />} />
         <Route path="/change-password" element={<ChangePassword />} />

@@ -16,6 +16,7 @@ type AuthContextType = {
   login: (email: string, password: string) => Promise<void>;
   create_admin: (email: string) => Promise<void>;
   signout: () => Promise<void>;
+  refresh: () => Promise<string>;
 };
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -25,7 +26,15 @@ export const useAuth = () => {
   if (context === undefined) {
     throw new Error("useAuth must be used within a AuthProvider");
   }
-  return context;
+  return context.auth;
+};
+
+export const useRefresh = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useRefresh must be used within a AuthProvider");
+  }
+  return context.refresh;
 };
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -71,7 +80,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []); // This syncs the auth state with the server on page load
 
   return (
-    <AuthContext.Provider value={{ auth, login, create_admin, signout }}>
+    <AuthContext.Provider value={{ auth, login, create_admin, signout, refresh }}>
       {children}
     </AuthContext.Provider>
   );

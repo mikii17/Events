@@ -16,6 +16,9 @@ export class Event {
 
   @Prop()
   image: string;
+
+  @Prop()
+  link: string;
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

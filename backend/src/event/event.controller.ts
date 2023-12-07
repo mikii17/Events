@@ -27,15 +27,15 @@ import { FileInterceptor } from '@nestjs/platform-express/multer';
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
-  @Roles(Role.Admin)
-  @UseGuards(AuthGuard, RolesGuard)
+  // @Roles(Role.Admin)
+  // @UseGuards(AuthGuard, RolesGuard)
   @Post()
   create(@Body() createEventDto: CreateEventDto) {
     return this.eventService.create(createEventDto);
   }
 
-  @UseGuards(AuthGuard, RolesGuard)
-  @Post('image/:id')
+  // @UseGuards(AuthGuard, RolesGuard)
+  @Post(':id/image')
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 type EventCardProps = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   date: string;

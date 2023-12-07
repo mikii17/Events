@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const ProtectionLayout = () => {
-    const { auth } = useAuth();
+    const auth  = useAuth();
     const { pathname } = useLocation();
 
     if (auth === undefined) {

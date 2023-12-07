@@ -10,6 +10,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EmailModule } from './email/email.module';
 import * as express from 'express';
 import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
@@ -35,7 +36,7 @@ import { join } from 'path';
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(express.static(join(__dirname, '..', 'images', 'events')))
+      .apply(express.static(join(__dirname, '..', 'images', 'images')))
       .forRoutes('*');
   }
 }

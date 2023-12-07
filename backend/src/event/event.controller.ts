@@ -27,19 +27,19 @@ import { FileInterceptor } from '@nestjs/platform-express/multer';
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
-  // @Roles(Role.Admin)
-  // @UseGuards(AuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
   @Post()
   create(@Body() createEventDto: CreateEventDto) {
     return this.eventService.create(createEventDto);
   }
 
-  // @UseGuards(AuthGuard, RolesGuard)
+  @UseGuards(AuthGuard, RolesGuard)
   @Post(':id/image')
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({
-        destination: './images/events',
+        destination: './images/images',
         filename: (_, file, cb) => {
           const name = file.originalname.split('.')[0];
           const fileExtention = file.originalname.split('.')[1];
@@ -63,7 +63,7 @@ export class EventController {
     if (!file) {
       throw new BadRequestException('File is not an image');
     } else {
-      const response = { image: `images/events/${file.filename}` };
+      const response = { image: `images/${file.filename}` };
 
       return await this.eventService.update(id, response);
     }

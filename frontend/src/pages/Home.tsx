@@ -39,6 +39,7 @@ const Home = () => {
                   description={event.description}
                   id={event._id}
                   title={event.title}
+                  image={event.image}
                 />
               ))}
             </div>

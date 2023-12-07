@@ -13,10 +13,14 @@ export class RegisteredUsersService {
     private readonly emailService: EmailService,
   ) {}
 
-  async create(createRegisteredUserDto: CreateRegisteredUserDto) {
-    const registeredUser = await this.registerUserModel.create(
-      createRegisteredUserDto,
-    );
+  async create(
+    createRegisteredUserDto: CreateRegisteredUserDto,
+    eventId: string,
+  ) {
+    const registeredUser = await this.registerUserModel.create({
+      ...createRegisteredUserDto,
+      eventId,
+    });
     await this.emailService.sendUserRegistration(
       registeredUser.fullName,
       registeredUser.email,

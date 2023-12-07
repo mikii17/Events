@@ -5,13 +5,14 @@ type EventCardProps = {
   title: string;
   description: string;
   date: string;
+  image?: string;
 };
-const EventCard = ({ id, title, description, date }: EventCardProps) => {
+const EventCard = ({ id, title, description, date, image }: EventCardProps) => {
   return (
-    <Link to={`/event/${id}`}>
+    <Link to={`/eventS/${id}`}>
       <div className='h-[502px] max-w-[21.875rem] rounded-lg overflow-hidden group neon transition-all duration-200'>
         <div className='h-[50%] bg-lightGreen flex items-center justify-center'>
-          <img src='/event.svg' alt='Event' width={'70%'} height={'150px'} />
+          <img src={image? `http://localhost:3000/${image}` : '/event.svg'} alt='Event' width={'70%'} height={'150px'} />
         </div>
 
         <div className='h-[50%] w-full bg-lightBlue p-3 group-hover:p-0 transition-all duration-500'>

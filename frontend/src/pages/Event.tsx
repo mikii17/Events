@@ -9,7 +9,6 @@ const Event = () => {
   const { data, isLoading, isError } = useQuery<EventType, Error>({
     queryKey: ["events", id],
     queryFn: async () => {
-        console.log("id:", id)
         const data = await axiosClient.get(`events/${id}`, {
           withCredentials: true,
         });
@@ -57,9 +56,10 @@ const Event = () => {
             </div>
 
             <div className="flex flex-col gap-2 justify-center items-center">
-              <button className="bg-accent p-2 px-4 rounded-lg">RSVP</button>
-              <Link to={data?.link || ""}>Check out the link</Link>
+              <Link to={`/register/${data?._id}`} className="bg-accent p-2 px-4 rounded-lg">RSVP</Link>
+              <Link to={data?.link || ""} target="_blank">Check out the link</Link>
             </div>
+            
           </section>
         </div>
       )}

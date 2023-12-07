@@ -38,7 +38,7 @@ const useCreateEvent = ({
           },
         }
       );
-      return data;
+      return data.data;
     },
   });
 

@@ -10,7 +10,7 @@ import {
 import "./index.css";
 import Home from "./pages/Home.tsx";
 import Event from "./pages/Event.tsx";
-import Register from "./pages/SignUp.tsx";
+import Register from "./pages/Register.tsx";
 import Error from "./pages/Error.tsx";
 import App from "./App.tsx";
 import Signup from "./pages/auth/Signup.tsx";
@@ -51,8 +51,8 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/events/:id" element={<Event />} />
       <Route path="/register/:id" element={<Register />} />
-        <Route path="/create-event" element={<CreateEvent />} />
       <Route element={<ProtectionLayout />}>
+        <Route path="/create-event" element={<CreateEvent />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/change-password" element={<ChangePassword />} />
       </Route>

@@ -16,9 +16,12 @@ export class RegisteredUsersController {
     private readonly registeredUsersService: RegisteredUsersService,
   ) {}
 
-  @Post()
-  create(@Body() createRegisteredUserDto: CreateRegisteredUserDto) {
-    return this.registeredUsersService.create(createRegisteredUserDto);
+  @Post(':id')
+  create(
+    @Body() createRegisteredUserDto: CreateRegisteredUserDto,
+    @Param('id') id: string,
+  ) {
+    return this.registeredUsersService.create(createRegisteredUserDto, id);
   }
 
   @Get('events/:eventId')

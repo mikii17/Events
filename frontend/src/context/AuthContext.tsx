@@ -17,6 +17,7 @@ type AuthContextType = {
   create_admin: (email: string) => Promise<void>;
   signout: () => Promise<void>;
   refresh: () => Promise<string>;
+  changePassword: (password: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -61,6 +62,15 @@ export const useSignout = () => {
   return context.signout;
 };
 
+export const useChangePassword = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useChangePassword must be used within a AuthProvider");
+  }
+  return context.changePassword;
+}
+
+
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [auth, setAuth] = useState<Auth | null | undefined>(undefined); // undefined: not yet fetched, null: not logged in, Auth: logged in
 
@@ -103,12 +113,18 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     refresh();
   }, []); // This syncs the auth state with the server on page load
 
-  useEffect(() => {
-    console.log("auth", auth);
-  }, [auth]);
+  const changePassword = async (password: string) => {
+    await axios_private.patch("/admin", {
+      password,
+    });
+  }
+
+  // useEffect(() => {
+  //   console.log("auth", auth);
+  // }, [auth]);
 
   return (
-    <AuthContext.Provider value={{ auth, login, create_admin, signout, refresh }}>
+    <AuthContext.Provider value={{ auth, login, create_admin, signout, refresh, changePassword }}>
       {children}
     </AuthContext.Provider>
   );

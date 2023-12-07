@@ -1,6 +1,6 @@
-import { IsStrongPassword } from 'class-validator';
+import { IsNotEmpty, IsStrongPassword } from 'class-validator';
 
 export class UpdateAdminDto {
-  @IsStrongPassword()
+  @IsNotEmpty()
   password: string;
 }

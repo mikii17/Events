@@ -61,7 +61,9 @@ export class AuthService {
       roles: user.roles,
     };
 
-    await this.adminService.updateRefreshToken(userId, tokens.refreshToken);
+    const hashedRefreshToken = await bcrypt.hash(tokens.refreshToken, 10);
+
+    await this.adminService.updateRefreshToken(userId, hashedRefreshToken);
     return { access_token: tokens.access_token, roles: tokens.roles };
   }
 

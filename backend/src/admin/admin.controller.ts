@@ -40,7 +40,7 @@ export class AdminController {
   }
 
   @Roles(Role.Admin)
-  @Patch('')
+  @Patch()
   update(@Req() req: Request, @Body() updateAdminDto: UpdateAdminDto) {
     return this.adminService.update(req['user'].sub, updateAdminDto);
   }

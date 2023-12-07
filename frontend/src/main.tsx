@@ -52,8 +52,8 @@ const router = createBrowserRouter(
       <Route path="/events/:id" element={<Event />} />
       <Route path="/register/:id" element={<Register />} />
       <Route element={<ProtectionLayout />}>
+        <Route path="/create-admin" element={<Signup />} />
         <Route path="/create-event" element={<CreateEvent />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/change-password" element={<ChangePassword />} />
       </Route>
       <Route path="*" element={<Error />} /> // TODO: 404 page

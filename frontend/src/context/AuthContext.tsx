@@ -37,6 +37,30 @@ export const useRefresh = () => {
   return context.refresh;
 };
 
+export const useLogin = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useLogin must be used within a AuthProvider");
+  }
+  return context.login;
+};
+
+export const useCreateAdmin = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useCreateAdmin must be used within a AuthProvider");
+  }
+  return context.create_admin;
+};
+
+export const useSignout = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useSignout must be used within a AuthProvider");
+  }
+  return context.signout;
+};
+
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [auth, setAuth] = useState<Auth | null | undefined>(undefined); // undefined: not yet fetched, null: not logged in, Auth: logged in
 
@@ -45,9 +69,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const response = await axiosClient.post("/auth/refresh", {
         withCredentials: true,
       });
-      const token = (response.data?.accessToken as string) || null;
+      const token = (response.data?.access_token as string) || null;
       setAuth(token ? { token } : null);
-      return response.data.accessToken;
+      return response.data.access_token;
       
     } catch (error: any) {
       setAuth(null);
@@ -62,7 +86,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         email,
         password,
       });
-      setAuth({ token: response.data.accessToken });
+      setAuth({ token: response.data.access_token });
     };
   const create_admin = 
     async (email: string) => {
@@ -78,6 +102,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     refresh();
   }, []); // This syncs the auth state with the server on page load
+
+  useEffect(() => {
+    console.log("auth", auth);
+  }, [auth]);
 
   return (
     <AuthContext.Provider value={{ auth, login, create_admin, signout, refresh }}>

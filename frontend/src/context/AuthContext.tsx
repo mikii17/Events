@@ -1,5 +1,10 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import axios_client from "../api/axios_client";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { axiosClient } from "../api/axios_client";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 interface Auth {
@@ -21,41 +26,45 @@ export const useAuth = () => {
     throw new Error("useAuth must be used within a AuthProvider");
   }
   return context;
-}
-
+};
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [auth, setAuth] = useState<Auth | null | undefined>(undefined); // undefined: not yet fetched, null: not logged in, Auth: logged in
 
   const refresh = async () => {
-    const response = await axios_client.get("/refresh", {
-      withCredentials: true,
-    });
-    const token = response.data?.accessToken as string || null;
-    setAuth(token ? { token } : null);
-    return response.data.accessToken;
+    try {
+      const response = await axiosClient.post("/auth/refresh", {
+        withCredentials: true,
+      });
+      const token = (response.data?.accessToken as string) || null;
+      setAuth(token ? { token } : null);
+      return response.data.accessToken;
+      
+    } catch (error: any) {
+      setAuth(null);
+      return "";
+    }
   };
 
   const axios_private = useAxiosPrivate({ token: auth?.token || "", refresh });
 
-  const login = useCallback(async (email: string, password: string) => {
-    const response = await axios_client.post("/auth/login", {
-      email,
-      password,
-    });
-    setAuth({ token: response.data.accessToken });
-  }, []);
-
-  const create_admin = async (email: string) => {
-    await axios_private.post("/auth/signup", {
-      email,
-    });
-  };
+  const login =  async (email: string, password: string) => {
+      const response = await axiosClient.post("/auth/login", {
+        email,
+        password,
+      });
+      setAuth({ token: response.data.accessToken });
+    };
+  const create_admin = 
+    async (email: string) => {
+      await axios_private.post("/auth/signup", {
+        email,
+      });
+    };
 
   const signout = async () => {
     await axios_private.post("/auth/signout");
-    setAuth(null);
-  };
+    setAuth(null)};
 
   useEffect(() => {
     refresh();

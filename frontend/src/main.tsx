@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -17,6 +17,7 @@ import Signup from "./pages/auth/Signup.tsx";
 import ChangePassword from "./pages/auth/ChangePassword.tsx";
 import Login from "./pages/auth/Login.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
+import ProtectionLayout from "./components/ProtectionLayout.tsx";
 
 // const router = createBrowserRouter([
 //   {
@@ -40,14 +41,16 @@ import AuthProvider from "./context/AuthContext.tsx";
 //   },
 // ]);
 
-const router1 = createBrowserRouter(
+const queryClient = new QueryClient();
+
+const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<Error />}>
       <Route index element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/event/:id" element={<Event />} />
+      <Route path="/events/:id" element={<Event />} />
       <Route path="/register/:id" element={<Register />} />
-      <Route>
+      <Route element={<ProtectionLayout />}>
         <Route path="/signup" element={<Signup />} />
         <Route path="/change-password" element={<ChangePassword />} />
       </Route>
@@ -57,8 +60,10 @@ const router1 = createBrowserRouter(
 );
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router1} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

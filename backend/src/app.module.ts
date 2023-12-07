@@ -6,7 +6,6 @@ import { AdminModule } from './admin/admin.module';
 import { RegisteredUsersModule } from './registered_users/registered_users.module';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EmailModule } from './email/email.module';
 import * as express from 'express';

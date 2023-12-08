@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateRegisteredUserDto } from './dto/create-registered_user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { RegisteredUser } from './schema/registered_user.schema';
@@ -17,6 +17,13 @@ export class RegisteredUsersService {
     createRegisteredUserDto: CreateRegisteredUserDto,
     eventId: string,
   ) {
+    const data = await this.registerUserModel.find({
+      email: createRegisteredUserDto.email,
+      eventId: eventId,
+    });
+    if (data.length > 0) {
+      throw new BadRequestException('User already registered');
+    }
     const registeredUser = await this.registerUserModel.create({
       ...createRegisteredUserDto,
       eventId,

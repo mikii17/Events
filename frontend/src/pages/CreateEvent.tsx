@@ -47,8 +47,8 @@ const CreateEvent = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-secondary">
-      {isError && <p className="text-red-500">{JSON.stringify(error)}</p>}
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      {isError && <p className="text-red-500 text-center">{error?.message || "Error occured"}</p>}
+      <div className="container max-w-xl mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <form
           onSubmit={handleSubmit}
           className="bg-primary px-6 py-8 rounded shadow-md w-full flex flex-col gap-10"
@@ -110,8 +110,8 @@ const CreateEvent = () => {
             />
           </div>
 
-          <button className="bg-accent p-2 rounded-lg" disabled={isPending}>
-            Register
+          <button className="bg-accent p-2 rounded-lg disabled:bg-accent/50" disabled={isPending}>
+            Create
           </button>
         </form>
       </div>

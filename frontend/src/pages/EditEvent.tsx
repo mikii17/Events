@@ -70,13 +70,13 @@ const EditEvent = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-secondary">
-      {isError && <p className="text-red-500">{JSON.stringify(error)}</p>}
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      {isError && <p className="text-red-500 text-center">{error?.message || "Error occured"}</p>}
+      <div className="container max-w-xl mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <form
           onSubmit={handleSubmit}
           className="bg-primary px-6 py-8 rounded shadow-md w-full flex flex-col gap-10"
         >
-          <h1 className="text-2xl text-center text-primary">Create Event</h1>
+          <h1 className="text-2xl text-center text-primary">Update Event</h1>
           <div>
             <input
               type="text"
@@ -133,7 +133,7 @@ const EditEvent = () => {
           </div>
 
           <button className="bg-accent p-2 rounded-lg" disabled={isPending}>
-            Register
+            Update
           </button>
         </form>
       </div>

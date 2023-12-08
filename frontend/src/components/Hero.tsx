@@ -1,13 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import UserDropDown from './UserDropDown';
+import { useState } from 'react';
 
 const Hero = () => {
+  const auth = useAuth();
+  const [searchParams, _] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+ 
+
+
   return (
     <div className='max-w-[1024px] h-full flex flex-col gap-12 items-center justify-center mx-auto px-2 relative'>
-      <Link to={'/'}>
-        <div className='absolute right-5 top-5'>
-          <img src='/logo.svg' alt='Logo' width={'50px'} height={'50px'} />
-        </div>
-      </Link>
+      {auth != null ?<UserDropDown /> : <Link to="/login" className='underline text-lg absolute right-5 top-5'>Login</Link>}
       <img src='/event.svg' alt='Event' width={'150px'} height={'150px'} />
 
       <div className='md:w-[80%] flex flex-col gap-7'>
@@ -23,8 +28,12 @@ const Hero = () => {
           type='text'
           className='p-3 rounded-lg text-black placeholder:text-black bg-green flex-[4]'
           placeholder='Event...'
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
         />
-        <button className='bg-accent p-2 rounded-lg flex-[1]'>Search</button>
+        <Link to={search ? `?search=${search}#events` : "#events"} className='bg-accent p-2 rounded-lg flex-[1] flex justify-center items-center'>Search</Link>
       </div>
       <a
         href='#events'

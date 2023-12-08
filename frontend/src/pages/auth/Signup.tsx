@@ -44,7 +44,7 @@ const Signup = () => {
           </div>
 
           <button className="bg-accent p-2 rounded-lg" disabled={isPending}>
-            Register
+            Create
           </button>
         </form>
       </div>

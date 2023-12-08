@@ -51,7 +51,7 @@ export class EventController {
         },
       }),
       fileFilter: (req, file, cb) => {
-        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
           return cb(null, false);
         }
         return cb(null, true);

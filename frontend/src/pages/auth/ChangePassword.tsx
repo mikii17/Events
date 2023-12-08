@@ -26,7 +26,7 @@ const ChangePassword = () => {
           onSubmit={handleSubmit}
           className="bg-primary px-6 py-8 rounded shadow-md w-full flex flex-col gap-10"
         >
-          <h1 className="text-2xl text-center text-primary">Create Admin</h1>
+          <h1 className="text-2xl text-center text-primary">Change Password</h1>
           {isError && <div className="text-red-500 text-center">Error</div>}
           <div>
             <input
@@ -41,7 +41,7 @@ const ChangePassword = () => {
           </div>
 
           <button className="bg-accent p-2 rounded-lg" disabled={isPending}>
-            Register
+            Change
           </button>
         </form>
       </div>

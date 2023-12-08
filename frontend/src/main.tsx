@@ -19,28 +19,7 @@ import Login from "./pages/auth/Login.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
 import ProtectionLayout from "./components/ProtectionLayout.tsx";
 import CreateEvent from "./pages/CreateEvent.tsx";
-
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//     errorElement: <Error />,
-//     children: [
-//       {
-//         path: "/",
-//         element: <Home />,
-//       },
-//       {
-//         path: "/event/:id",
-//         element: <Event />,
-//       },
-//       {
-//         path: "/signup",
-//         element: <Register />,
-//       },
-//     ],
-//   },
-// ]);
+import EditEvent from "./pages/EditEvent.tsx";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +33,7 @@ const router = createBrowserRouter(
       <Route element={<ProtectionLayout />}>
         <Route path="/create-admin" element={<Signup />} />
         <Route path="/create-event" element={<CreateEvent />} />
+        <Route path="/edit-event/:id" element={<EditEvent />} />
         <Route path="/change-password" element={<ChangePassword />} />
       </Route>
       <Route path="*" element={<Error />} /> // TODO: 404 page

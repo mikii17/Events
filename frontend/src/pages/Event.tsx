@@ -39,7 +39,7 @@ const Event = () => {
             <div className="flex items-center justify-between">
               <h1 className="text-primary text-xl">{data?.title}</h1>
               <div className="flex gap-3">
-                <button className="underline">Edit</button>
+                <Link to={`/edit-event/${data?._id}`} className="underline">Edit</Link>
                 <button className="underline">Delete</button>
               </div>
             </div>

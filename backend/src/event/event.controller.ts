@@ -12,6 +12,8 @@ import {
   Req,
   BadRequestException,
   Query,
+  ValidationPipe,
+  UsePipes,
 } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -65,7 +67,7 @@ export class EventController {
     } else {
       const response = { image: `images/${file.filename}` };
 
-      return await this.eventService.update(id, response);
+      return await this.eventService.update(id, response as UpdateEventDto);
     }
   }
 

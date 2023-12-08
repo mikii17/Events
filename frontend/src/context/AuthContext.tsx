@@ -22,54 +22,6 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within a AuthProvider");
-  }
-  return context.auth;
-};
-
-export const useRefresh = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useRefresh must be used within a AuthProvider");
-  }
-  return context.refresh;
-};
-
-export const useLogin = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useLogin must be used within a AuthProvider");
-  }
-  return context.login;
-};
-
-export const useCreateAdmin = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useCreateAdmin must be used within a AuthProvider");
-  }
-  return context.create_admin;
-};
-
-export const useSignout = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useSignout must be used within a AuthProvider");
-  }
-  return context.signout;
-};
-
-export const useChangePassword = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useChangePassword must be used within a AuthProvider");
-  }
-  return context.changePassword;
-}
-
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [auth, setAuth] = useState<Auth | null | undefined>(undefined); // undefined: not yet fetched, null: not logged in, Auth: logged in
@@ -131,3 +83,53 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default AuthProvider;
+
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within a AuthProvider");
+  }
+  return context.auth;
+};
+
+export const useRefresh = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useRefresh must be used within a AuthProvider");
+  }
+  return context.refresh;
+};
+
+export const useLogin = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useLogin must be used within a AuthProvider");
+  }
+  return context.login;
+};
+
+export const useCreateAdmin = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useCreateAdmin must be used within a AuthProvider");
+  }
+  return context.create_admin;
+};
+
+export const useSignout = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useSignout must be used within a AuthProvider");
+  }
+  return context.signout;
+};
+
+export const useChangePassword = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useChangePassword must be used within a AuthProvider");
+  }
+  return context.changePassword;
+}
+

@@ -1,15 +1,21 @@
-import { CreateEventDto } from './create-event.dto';
+import { IsOptional } from 'class-validator';
 
 export class UpdateEventDto {
-  title?: string;
+  @IsOptional()
+  title: string;
 
-  description?: string;
+  @IsOptional()
+  description: string;
 
-  when?: string;
+  @IsOptional()
+  when: string;
 
-  link?: string;
+  @IsOptional()
+  link: string;
 
-  address?: string;
+  @IsOptional()
+  address: string;
 
-  image?: string;
+  @IsOptional()
+  image: string;
 }

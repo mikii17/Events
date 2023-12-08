@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import { useQuery } from "@tanstack/react-query";
 import { Event } from "../types/event.type";
 import EventCard from "../components/EventCard";
+import NoEvents from "../components/NoEvents";
 const Home = () => {
   const { data, isLoading, isError } = useQuery<Event[], Error>({
     queryKey: ["events"],
@@ -23,7 +24,7 @@ const Home = () => {
       ) : isError ? (
         <div>Error</div>
       ) : data?.length === 0 ? (
-        <div>No events</div>
+        <NoEvents />
       ) : (
         <div className="min-h-[100vh] py-10 px-4" id="events">
           <div className="max-w-[1024px] mx-auto flex flex-col items-center">

@@ -20,6 +20,7 @@ import AuthProvider from "./context/AuthContext.tsx";
 import ProtectionLayout from "./components/ProtectionLayout.tsx";
 import CreateEvent from "./pages/CreateEvent.tsx";
 import EditEvent from "./pages/EditEvent.tsx";
+import NotFound from "./pages/404.tsx";
 
 const queryClient = new QueryClient();
 
@@ -36,7 +37,7 @@ const router = createBrowserRouter(
         <Route path="/edit-event/:id" element={<EditEvent />} />
         <Route path="/change-password" element={<ChangePassword />} />
       </Route>
-      <Route path="*" element={<Error />} /> // TODO: 404 page
+      <Route path="*" element={<NotFound />} /> 
     </Route>
   )
 );

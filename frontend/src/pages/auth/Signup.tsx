@@ -30,7 +30,7 @@ const Signup = () => {
           className="bg-primary px-6 py-8 rounded shadow-md w-full flex flex-col gap-10"
         >
           <h1 className="text-2xl text-center text-primary">Create Admin</h1>
-          {isError && <div className="text-red-500 text-center">Error</div>}
+          {isError && <div className="text-red-500 text-center">Error has occured. The email may already exist.</div>}
           <div>
             <input
               type="email"

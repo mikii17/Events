@@ -27,7 +27,7 @@ const ChangePassword = () => {
           className="bg-primary px-6 py-8 rounded shadow-md w-full flex flex-col gap-10"
         >
           <h1 className="text-2xl text-center text-primary">Change Password</h1>
-          {isError && <div className="text-red-500 text-center">Error</div>}
+          {isError && <div className="text-red-500 text-center">Error has occured.</div>}
           <div>
             <input
               type="password"

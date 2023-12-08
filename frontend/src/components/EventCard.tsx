@@ -9,7 +9,7 @@ type EventCardProps = {
 };
 const EventCard = ({ id, title, description, date, image }: EventCardProps) => {
   return (
-    <Link to={`/eventS/${id}`}>
+    <Link to={`/events/${id}`}>
       <div className='h-[502px] max-w-[21.875rem] rounded-lg overflow-hidden group neon transition-all duration-200'>
         <div className='h-[50%] bg-lightGreen flex items-center justify-center'>
           <img src={image? `http://localhost:3000/${image}` : '/event.svg'} alt='Event' width={'70%'} height={'150px'} />

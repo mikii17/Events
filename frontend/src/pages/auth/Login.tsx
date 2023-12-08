@@ -9,7 +9,7 @@ interface LoginFormData {
 }
 const Login = () => {
   const [searchParams, _] = useSearchParams();
-  let redirectUrl = searchParams.get("redirectUrl") || "/";
+  let redirectUrl = searchParams.get("redirectTo") || "/";
   redirectUrl = redirectUrl !== '/' ? atob(redirectUrl) : redirectUrl;
 
   const [formData, setFormData] = useState<LoginFormData>({
@@ -44,7 +44,7 @@ const Login = () => {
         className="bg-primary px-6 py-8 rounded shadow-md w-full flex flex-col gap-10"
       >
         <h1 className="text-2xl text-center text-primary">Login</h1>
-        {isError && <div className="text-red-500 text-center">Error</div>}
+        {isError && <div className="text-red-500 text-center">Error has occured. Check the credentials.</div>}
         <div>
           <input
             type="email"

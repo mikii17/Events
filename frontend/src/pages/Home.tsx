@@ -23,7 +23,7 @@ const Home = () => {
   });
   useEffect(() => {
     refetch();
-  }, [search]); 
+  }, [search]);
   return (
     <main>
       <section className="h-screen bg-primary relative px-2">
@@ -32,7 +32,10 @@ const Home = () => {
       {isLoading ? (
         <div>Loading...</div>
       ) : isError ? (
-        <div id="events" className="min-h-[100vh] mx-auto flex flex-col items-center justify-center gap-10">
+        <div
+          id="events"
+          className="min-h-[100vh] mx-auto flex flex-col items-center justify-center gap-10"
+        >
           <h2 className="text-xl text-primary">
             Oops! Sorry, an unexpected error has occurred.
           </h2>
@@ -43,14 +46,22 @@ const Home = () => {
       ) : (
         <div className="min-h-[100vh] py-10 px-4" id="events">
           <div className="max-w-[1024px] mx-auto flex flex-col items-center">
-            {auth != null && (
-              <div className="flex w-full justify-between items-center">
-                {search && <p className=""><span className="text-primary">Showing result for: </span>{search}</p>}
-                <Link to={"/create-event"} className="bg-accent p-2 rounded-lg ">
+            <div className="flex w-full justify-between items-center">
+              {search && (
+                <p className="">
+                  <span className="text-primary">Showing result for: </span>
+                  {search}
+                </p>
+              )}
+              {auth != null && (
+                <Link
+                  to={"/create-event"}
+                  className="bg-accent p-2 rounded-lg "
+                >
                   Add Event
                 </Link>
-              </div>
-            )}
+              )}
+            </div>
             {/* <Events /> */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 my-16">
               {data?.map((event) => (

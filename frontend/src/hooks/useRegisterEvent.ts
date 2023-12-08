@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { axiosClient } from "../api/axios_client";
 
 const useRegisterEvent = (fullName: string, email: string, id?: string) => {
-  const { mutate, isError, isIdle, isPending, isSuccess } = useMutation({
+  const { mutate, isError, isIdle, isPending, isSuccess, error } = useMutation({
     mutationFn: async ({
       fullName,
       email,
@@ -35,7 +35,7 @@ const useRegisterEvent = (fullName: string, email: string, id?: string) => {
     mutate({ fullName, email, id });
   };
 
-  return { handleRegister, isError, isIdle, isPending, isSuccess };
+  return { handleRegister, isError, isIdle, isPending, isSuccess, error };
 };
 
 export default useRegisterEvent;

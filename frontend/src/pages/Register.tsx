@@ -4,6 +4,7 @@ import { axiosClient } from "../api/axios_client";
 import { Event } from "../types/event.type";
 import { useState } from "react";
 import useRegisterEvent from "../hooks/useRegisterEvent";
+import Error from "./Error";
 
 interface RegisterFormData {
   fullName: string;
@@ -40,11 +41,11 @@ const Register = () => {
     handleRegister();
   };
   
-  if (isLoading || isPending) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
   if (isErrorLoading) {
-    return <div>Error</div>;
+    return <Error />;
   }
   if (isSuccess) {
     return <Navigate to={`/events/${id}`} replace/>;
@@ -54,7 +55,7 @@ const Register = () => {
       <div className='container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2'>
         <form onSubmit={handleSubmit} className='bg-primary px-6 py-8 rounded shadow-md w-full flex flex-col gap-10'>
           <h1 className='text-2xl text-center text-primary'>Register</h1>
-          {isError && <div className='text-red-500 text-center'>Error</div>}
+          {isError && <div className='text-red-500 text-center'>{"Error has occured! The email may already exist."}</div>}
           <div>
             <input
               type='text'

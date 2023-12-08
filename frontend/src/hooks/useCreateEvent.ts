@@ -27,7 +27,6 @@ const useCreateEvent = ({
       const eventId = data.data._id;
       const imageFormData = new FormData();
       imageFormData.append("image", image, image.name);
-      console.log(imageFormData);
 
       data = await axiosPrivate.post(
         `/events/${eventId}/image`,

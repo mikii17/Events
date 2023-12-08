@@ -36,7 +36,6 @@ const useEditEvent = ({
       if (image) {
         const imageFormData = new FormData();
         imageFormData.append("image", image, image.name);
-        console.log(imageFormData);
 
         data = await axiosPrivate.post(`/events/${id}/image`, imageFormData, {
           headers: {

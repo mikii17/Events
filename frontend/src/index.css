@@ -18,6 +18,10 @@ body {
   color: white;
 }
 
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
 .up-down {
   animation: MoveUpDown 1s ease-in-out infinite;
 }

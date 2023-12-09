@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLogin } from "../../context/AuthContext";
 import { useMutation } from "@tanstack/react-query";
 import { Navigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface LoginFormData {
   email: string;
@@ -33,6 +34,7 @@ const Login = () => {
   };
 
   if (isSuccess) {
+    toast.success("Logged in successfully!");
     return <Navigate to={redirectUrl} />;
   }
 

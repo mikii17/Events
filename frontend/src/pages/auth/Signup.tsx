@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useCreateAdmin } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [email, setEmail] = useState<string>("");
@@ -9,7 +10,7 @@ const Signup = () => {
   };
 
   const createAdmin = useCreateAdmin();
-  const { mutate, isError, isPending } = useMutation({
+  const { mutate, isError, isPending, isSuccess } = useMutation({
     mutationFn: createAdmin,
     onSuccess: () => {
       setEmail("");
@@ -21,7 +22,9 @@ const Signup = () => {
     mutate(email);
   }
   
-
+  if (isSuccess){
+    toast.success("Admin created successfully!");
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-secondary">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">

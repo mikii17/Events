@@ -2,6 +2,7 @@ import { useState } from "react";
 import { EventFormData } from "../types/eventFormData.type";
 import useCreateEvent from "../hooks/useCreateEvent";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CreateEvent = () => {
   const [formData, setFormData] = useState<EventFormData>({
@@ -42,6 +43,7 @@ const CreateEvent = () => {
   };
 
   if (isSuccess) {
+    toast.success("Event created successfully!");
     return <Navigate to="/" />;
   }
 

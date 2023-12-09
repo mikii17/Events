@@ -5,6 +5,7 @@ import { Event } from "../types/event.type";
 import { useState } from "react";
 import useRegisterEvent from "../hooks/useRegisterEvent";
 import Error from "./Error";
+import { toast } from "react-toastify";
 
 interface RegisterFormData {
   fullName: string;
@@ -48,6 +49,7 @@ const Register = () => {
     return <Error />;
   }
   if (isSuccess) {
+      toast.success("Registered successfully!");
     return <Navigate to={`/events/${id}`} replace/>;
   }
   return (

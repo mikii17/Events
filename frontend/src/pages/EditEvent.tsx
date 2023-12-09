@@ -4,6 +4,7 @@ import { Event } from "../types/event.type";
 import { axiosClient } from "../api/axios_client";
 import { useEffect, useState } from "react";
 import useEditEvent from "../hooks/useEditEvent";
+import { toast } from "react-toastify";
 
 const EditEvent = () => {
   const { id } = useParams<{ id: string }>();
@@ -65,6 +66,7 @@ const EditEvent = () => {
     return <div>Error</div>;
   }
   if (isSuccess) {
+    toast.success("Event updated successfully!");
     return <Navigate to={`/events/${id}`} />;
   }
 

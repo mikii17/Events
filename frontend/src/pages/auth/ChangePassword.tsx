@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useChangePassword } from "../../context/AuthContext"
 import { useMutation } from "@tanstack/react-query"
+import { toast } from "react-toastify"
 
 const ChangePassword = () => {
   const [password, setPassword] = useState<string>("")
@@ -8,7 +9,7 @@ const ChangePassword = () => {
     setPassword(e.target.value)
   }
   const changePassword = useChangePassword();
-  const { mutate, isError, isPending } = useMutation({
+  const { mutate, isError, isPending, isSuccess } = useMutation({
     mutationFn: changePassword,
     onSuccess: () => {
       setPassword("")
@@ -17,6 +18,10 @@ const ChangePassword = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     mutate(password)
+  }
+
+  if (isSuccess) {
+    toast.success("Password changed successfully!");
   }
 
   return (

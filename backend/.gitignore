@@ -3,6 +3,8 @@
 /node_modules
 /images
 
+.env
+
 # Logs
 logs
 *.log

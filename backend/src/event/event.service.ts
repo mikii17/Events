@@ -15,13 +15,19 @@ export class EventService {
     return await this.eventModel.create(createEventDto);
   }
 
-  async findAll(search: string) {
-    if (search) {
-      return await this.eventModel.find({
+  async findAll({ search = '', page = 1 }: { search: string; page: number }) {
+    const data = await this.eventModel.find(
+      {
         title: { $regex: search, $options: 'i' },
-      });
-    }
-    return await this.eventModel.find();
+      },
+      null,
+      { skip: (page - 1) * 10, limit: 10 },
+    );
+    const total = await this.eventModel.countDocuments({
+      title: { $regex: search, $options: 'i' },
+    });
+    const nextPage = total - page * 10 > 0 ? page + 1 : null;
+    return { data, nextPage };
   }
 
   async findOne(id: string) {

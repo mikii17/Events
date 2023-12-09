@@ -72,8 +72,8 @@ export class EventController {
   }
 
   @Get()
-  findAll(@Query('search') search: string) {
-    return this.eventService.findAll(search);
+  findAll(@Query('search') search: string, @Query('page') page: number) {
+    return this.eventService.findAll({ search, page });
   }
 
   @Get(':id')

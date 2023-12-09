@@ -58,7 +58,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
   const signout = async () => {
-    await axios_private.post("/auth/signout");
+    await axios_private.post("/auth/logout");
     setAuth(null)};
 
   useEffect(() => {

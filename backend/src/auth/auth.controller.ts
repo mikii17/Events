@@ -45,12 +45,9 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Post('logout')
-  async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+  async logout(@Req() req: Request, @Res({ passthrough: true }) res: any) {
     const userId = req['user'].sub;
-    res.headers.set(
-      'Set-Cookie',
-      `refreshToken=; HttpOnly; secure; Max-Age=0;`,
-    );
+    res.setHeader('Set-Cookie', `refreshToken=; HttpOnly; secure; Max-Age=0;`);
     await this.authService.logout(userId);
   }
 }

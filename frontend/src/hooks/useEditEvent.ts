@@ -26,7 +26,6 @@ const useEditEvent = ({
       image: File | null;
       id: string | undefined;
     }) => {
-      console.log(formData, image, id);
       if (!id) throw new Error("No id provided");
       let data = await axiosPrivate.patch(`/events/${id}`, formData, {
         headers: {

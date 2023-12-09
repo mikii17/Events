@@ -71,7 +71,6 @@ export class AuthService {
     const email = loginAuthDto.email;
     const password = loginAuthDto.password;
     const user = await this.adminService.findOneByEmail(email);
-    console.log(user);
     const hashedPassword = await bcrypt.hash(password, user.salt);
     const isMatch = hashedPassword === user.password;
     if (!user || !isMatch) {
@@ -84,8 +83,6 @@ export class AuthService {
       expiresIn: '7d',
     });
     const hashedRefreshToken = await bcrypt.hash(refreshToken, 10);
-    console.log('herer');
-    console.log(refreshToken);
     await this.adminService.updateRefreshToken(user.id, hashedRefreshToken);
 
     return {

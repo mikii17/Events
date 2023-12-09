@@ -70,11 +70,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       password,
     });
   }
-
-  // useEffect(() => {
-  //   console.log("auth", auth);
-  // }, [auth]);
-
+  
   return (
     <AuthContext.Provider value={{ auth, login, create_admin, signout, refresh, changePassword }}>
       {children}

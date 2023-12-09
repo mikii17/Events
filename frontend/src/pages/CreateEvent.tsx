@@ -30,10 +30,8 @@ const CreateEvent = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("jhere")
     if (e.target.files) {
       setImage(e.target.files[0]);
-      console.log(e.target.files[0])
     }
   };
 

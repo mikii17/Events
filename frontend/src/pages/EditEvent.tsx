@@ -5,11 +5,17 @@ import { axiosClient } from "../api/axios_client";
 import { useEffect, useState } from "react";
 import useEditEvent from "../hooks/useEditEvent";
 import { toast } from "react-toastify";
+import Error from "./Error";
+import LoaderSpin from "../components/LoaderSpin";
 
 const EditEvent = () => {
   const { id } = useParams<{ id: string }>();
 
-  const { data, isLoading, isError: isErrorOnLoading } = useQuery<Event, Error>({
+  const {
+    data,
+    isLoading,
+    isError: isErrorOnLoading,
+  } = useQuery<Event, Error>({
     queryKey: ["events", id],
     queryFn: async () => {
       const data = await axiosClient.get(`/events/${id}`, {
@@ -40,12 +46,15 @@ const EditEvent = () => {
     }
   };
 
-  const { updateEvent, error, isError, isPending, isSuccess} = useEditEvent({formData, image, id});
+  const { updateEvent, error, isError, isPending, isSuccess } = useEditEvent({
+    formData,
+    image,
+    id,
+  });
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     updateEvent();
-  }
-
+  };
 
   useEffect(() => {
     if (data) {
@@ -60,10 +69,16 @@ const EditEvent = () => {
   }, [data]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <section className="min-h-screen flex items-center justify-center bg-secondary">
+        <div className="w-28 h-28">
+          <LoaderSpin />
+        </div>
+      </section>
+    );
   }
   if (isErrorOnLoading) {
-    return <div>Error</div>;
+    return <Error />;
   }
   if (isSuccess) {
     toast.success("Event updated successfully!");
@@ -72,7 +87,11 @@ const EditEvent = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-secondary">
-      {isError && <p className="text-red-500 text-center">{error?.message || "Error occured"}</p>}
+      {isError && (
+        <p className="text-red-500 text-center">
+          {error?.message || "Error occured"}
+        </p>
+      )}
       <div className="container max-w-xl mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <form
           onSubmit={handleSubmit}

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import Error from "./Error";
 import UserList from "../components/UserList";
+import LoaderSpin from "../components/LoaderSpin";
 
 const Event = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,7 +35,11 @@ const Event = () => {
       />
       <main className=" ">
         {isLoading ? (
-          <div>Loading...</div>
+          <div className="min-h-screen bg-primary px-5 py-10 mx-auto flex flex-col md:flex-row items-center justify-center gap-10">
+            <div className="w-28 h-28">
+              <LoaderSpin />
+            </div>
+          </div>
         ) : isError ? (
           <Error />
         ) : (

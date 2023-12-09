@@ -8,6 +8,7 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import EventCardSkeleton from "../components/EventCardSkeleton";
+import Footer from "../components/Footer";
 const Home = () => {
   const auth = useAuth();
   const [searchParams, _] = useSearchParams();
@@ -26,12 +27,13 @@ const Home = () => {
     refetch();
   }, [search]);
   return (
+    <>
     <main>
       <section className="h-screen bg-primary relative px-2">
         <Hero />
       </section>
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 my-16" >
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 my-16 py-10 px-4" >
               <EventCardSkeleton />
               <EventCardSkeleton />
               <EventCardSkeleton />
@@ -88,6 +90,8 @@ const Home = () => {
         </div>
       )}
     </main>
+    <Footer />
+    </>
   );
 };
 

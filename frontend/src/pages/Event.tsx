@@ -41,12 +41,13 @@ const Event = () => {
           <div className="bg-primary">
             <div className="min-h-screen max-w-[1024px] bg-primary px-5 py-10 mx-auto flex flex-col md:flex-row items-center justify-center gap-10">
               <section className="flex-[1] self-center md:self-start">
-                <div className=" bg-lightGreen flex justify-center items-center p-16 rounded-lg">
+                <div className=" bg-lightGreen flex justify-center items-center h-[300px] min-w-[300px] rounded-lg overflow-hidden border-2 border-primary" >
                   <img
-                    src={data?.image || "/event.svg"}
+                    src={data?.image ? `http://localhost:3000/${data?.image}` : "/event.svg"}
                     alt="Event"
                     width={"170px"}
                     height={"170px"}
+                    className='object-cover object-top h-full w-full block'
                   />
                 </div>
               </section>
@@ -60,12 +61,12 @@ const Event = () => {
                     <div className="flex gap-3">
                       <Link
                         to={`/edit-event/${data?._id}`}
-                        className="underline"
+                        className="underline hover:no-underline focus:no-underline"
                       >
                         Edit
                       </Link>
                       <button
-                        className="underline"
+                        className="underline hover:no-underline focus:no-underline"
                         onClick={() => setOpen(true)}
                       >
                         Delete
@@ -100,7 +101,7 @@ const Event = () => {
                 <div className="flex flex-col gap-10 justify-center items-center">
                   <Link
                     to={`/register/${data?._id}`}
-                    className="bg-accent p-2 px-4 rounded-lg"
+                    className="bg-accent p-3 px-5 rounded-lg transition-all hover:rounded-full hover:bg-accent/75 focus:rounded-full"
                   >
                     RSVP
                   </Link>

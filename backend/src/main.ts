@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as cookieParser from 'cookie-parser';
+import * as express from 'express';
+import * as path from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -17,6 +19,10 @@ async function bootstrap() {
       transform: true,
       whitelist: true,
     }),
+  );
+  app.use(
+    '/images',
+    express.static(path.join(__dirname, '..', 'images', 'images')),
   );
   app.use(cookieParser());
   await app.listen(3000);

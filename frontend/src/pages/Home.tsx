@@ -7,6 +7,7 @@ import NoEvents from "../components/NoEvents";
 import { useAuth } from "../context/AuthContext";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import EventCardSkeleton from "../components/EventCardSkeleton";
 const Home = () => {
   const auth = useAuth();
   const [searchParams, _] = useSearchParams();
@@ -30,7 +31,14 @@ const Home = () => {
         <Hero />
       </section>
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 my-16" >
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+        </div>
       ) : isError ? (
         <div
           id="events"
@@ -75,6 +83,7 @@ const Home = () => {
                 />
               ))}
             </div>
+
           </div>
         </div>
       )}

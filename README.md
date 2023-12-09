@@ -6,8 +6,8 @@ Welcome to your full-stack application! This repository contains both the backen
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/mikii17/your-full-stack-app.git
-    cd your-full-stack-app
+    git clone https://github.com/mikii17/Events.git
+    cd Events
     ```
 
 2. **Backend Setup:**

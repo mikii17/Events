@@ -41,7 +41,7 @@ const Home = () => {
         <Hero />
       </section>
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 my-16 py-10 px-4" >
+        <div className="grid max-w-[1024px] mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 my-16 py-10 px-4" >
               <EventCardSkeleton />
               <EventCardSkeleton />
               <EventCardSkeleton />
